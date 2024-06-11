@@ -4,7 +4,7 @@ const square=new Square("MAG","black","yellow")
 describe("Square", ()=>{
     describe("properties", ()=>{
         it("test text, textColor, and shapeColor", ()=>{  
-            expectr(square.text).toEqual("MAG")
+            expect(square.text).toEqual("MAG")
             expect(square.textColor).toEqual("black")
             expect(square.shapeColor).toEqual("yellow")
 

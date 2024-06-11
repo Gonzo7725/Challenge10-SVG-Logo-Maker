@@ -14,7 +14,10 @@ const questions=[
     {
         type:"input",
         message:"Enter 3 letters:",
-        name:"text"
+        name:"text",
+        validate: function(input) {
+            return input.length > 0 && input.length <= 3 ? true : "Please enter up to three characters.";
+        }
     },
     {
         type:"input",
@@ -29,6 +32,7 @@ const questions=[
 ]
 
 inquirer.prompt(questions)
+
 .then(data=>{
     if(data.shape==="circle"){
         const circle=new Circle(data.text,data.textColor,data.shapeColor)
@@ -51,5 +55,18 @@ inquirer.prompt(questions)
 
     }
 
-    
+    const svgCode = shape.render();
+
+        // Write SVG code to a file with a dynamic filename
+        const filename = `./examples/${data.shape}.svg`;
+        fs.writeFile(filename, svgCode, err => {
+            if (err) {
+                console.error("Error writing SVG file:", err);
+            } else {
+                console.log(`Generated ${filename}`);
+            }
+        });
+    })
+    .catch(error => {
+        console.error("Error:", error);
 })
